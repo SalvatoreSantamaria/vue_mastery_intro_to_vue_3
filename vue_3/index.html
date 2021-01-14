@@ -18,7 +18,7 @@
           <!-- Attribute Binding -->
           <!-- Use v-bind to bind an attribute to an expression. -->
           <!-- attribute is src and expression is "image". Shorthand v-bind: <img :src="image">  -->
-          <img v-bind:src="image"> 
+          <img v-bind:src="image" :class="{ 'out-of-stock-img': !inStock } "> 
           <a :href="someUrl">www.test.com</a>
         </div>
         <div class="product-info">
@@ -36,10 +36,15 @@
             <li v-for="detail in details">{{ detail }}</li>
           </ul>
           <p>Variants</p>
-          <ul>
-            <!-- need to give each item a unique key -->
-            <li v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" >ID: {{ variant.id }} Color: {{ variant.color }}</li>
-          </ul>
+          <!-- <ul>
+             need to give each item a unique key 
+            <li v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style=" {backgroundColor: variant.color }">ID: {{ variant.id }} Color: {{ variant.color }}</li>
+          </ul> -->
+
+          <!-- Class and style binding. use camelCase or kebab in quotes: {backgroundColor: variant.color }  or {'background-color': variant.color } -->
+          <div
+          v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style=" {backgroundColor: variant.color }">
+        </div>
           <p>Sizes</p>
           <ul>
             <li v-for="size of sizes" :key="size">{{ size }}</li>
@@ -47,7 +52,8 @@
           <!-- Click is the event we are listening for, "cart += 1" is the targeted expression  -->
           <!-- <button class="button" v-on:click="cart += 1">Add to cart</button> -->
           <!-- using method for target expression . shorthard for v-on:click is @click -->
-           <button class="button" v-on:click="addToCart">Add to cart</button> 
+          <!-- Class binding, adds the class disableButton when !inStock . could also use ternary "[!inStock ? disabledButton : '']"-->
+           <button class="button" :disabled="!inStock" :class="{ disabledButton: !inStock }" v-on:click="addToCart">Add to cart</button> 
            <button class="button" v-on:click="removeFromCart">Remove from cart</button> 
       </div>
     </div>
