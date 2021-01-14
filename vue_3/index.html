@@ -11,6 +11,7 @@
 
   <div id="app">
     <div class="nav-bar"></div>
+    <div class="cart">Cart {{ cart }} </div>
     <div class="product-display">
       <div class="product-container">
         <div class="product-image">
@@ -37,13 +38,17 @@
           <p>Variants</p>
           <ul>
             <!-- need to give each item a unique key -->
-            <li v-for="variant in variants" :key="variant.id">ID: {{ variant.id }} Color: {{ variant.color }}</li>
+            <li v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" >ID: {{ variant.id }} Color: {{ variant.color }}</li>
           </ul>
           <p>Sizes</p>
           <ul>
             <li v-for="size of sizes" :key="size">{{ size }}</li>
           </ul>
-        </div>
+          <!-- Click is the event we are listening for, "cart += 1" is the targeted expression  -->
+          <!-- <button class="button" v-on:click="cart += 1">Add to cart</button> -->
+          <!-- using method for target expression . shorthard for v-on:click is @click -->
+           <button class="button" v-on:click="addToCart">Add to cart</button> 
+           <button class="button" v-on:click="removeFromCart">Remove from cart</button> 
       </div>
     </div>
 
