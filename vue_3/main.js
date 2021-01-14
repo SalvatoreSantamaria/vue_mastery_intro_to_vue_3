@@ -8,7 +8,9 @@ const app = Vue.createApp({
       product: "Socks",
       description: "Cotton, size large.",
       image: './assets/images/socks_green.jpg',
-      someUrl: 'www.google.com'
+      someUrl: 'www.google.com',
+      onSale: true,
+      inventory: 9
     }
   }
 })
