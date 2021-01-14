@@ -30,6 +30,19 @@
           <p v-if="inventory > 10">In Stock</p>
           <p v-else-if="inventory <= 10 && inventory > 0">Stock running low</p>
           <p v-else>Out of Stock</p>
+          <p>Details</p>
+          <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+          </ul>
+          <p>Variants</p>
+          <ul>
+            <!-- need to give each item a unique key -->
+            <li v-for="variant in variants" :key="variant.id">ID: {{ variant.id }} Color: {{ variant.color }}</li>
+          </ul>
+          <p>Sizes</p>
+          <ul>
+            <li v-for="size of sizes" :key="size">{{ size }}</li>
+          </ul>
         </div>
       </div>
     </div>
