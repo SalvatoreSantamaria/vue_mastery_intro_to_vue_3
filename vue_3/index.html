@@ -22,10 +22,13 @@
           <a :href="someUrl">www.test.com</a>
         </div>
         <div class="product-info">
+          <!-- Computed Properties -->
+          <h1>{{ title }}</h1>
+
           <h1>{{ product }}</h1>
           <p> {{ description }}</p>
           <!-- Conditional Rendering. Can also use v-show -->
-          <p v-if="onSale">On Sale!</p>
+          <p v-if="onSale">{{ onSaleMessage }}</p>
           <!-- <p v-else>Not on sale</p> -->
 
           <p v-if="inventory > 10">In Stock</p>
@@ -42,8 +45,13 @@
           </ul> -->
 
           <!-- Class and style binding. use camelCase or kebab in quotes: {backgroundColor: variant.color }  or {'background-color': variant.color } -->
-          <div
+          <!-- <div
           v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style=" {backgroundColor: variant.color }">
+        </div> -->
+          
+          <!-- Computed Properties -->
+          <div
+          v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style=" {backgroundColor: variant.color }">
         </div>
           <p>Sizes</p>
           <ul>
