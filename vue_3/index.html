@@ -12,64 +12,15 @@
   <div id="app">
     <div class="nav-bar"></div>
     <div class="cart">Cart {{ cart }} </div>
-    <div class="product-display">
-      <div class="product-container">
-        <div class="product-image">
-          <!-- Attribute Binding -->
-          <!-- Use v-bind to bind an attribute to an expression. -->
-          <!-- attribute is src and expression is "image". Shorthand v-bind: <img :src="image">  -->
-          <img v-bind:src="image" :class="{ 'out-of-stock-img': !inStock } "> 
-          <a :href="someUrl">www.test.com</a>
-        </div>
-        <div class="product-info">
-          <!-- Computed Properties -->
-          <h1>{{ title }}</h1>
-
-          <h1>{{ product }}</h1>
-          <p> {{ description }}</p>
-          <!-- Conditional Rendering. Can also use v-show -->
-          <p v-if="onSale">{{ onSaleMessage }}</p>
-          <!-- <p v-else>Not on sale</p> -->
-
-          <p v-if="inventory > 10">In Stock</p>
-          <p v-else-if="inventory <= 10 && inventory > 0">Stock running low</p>
-          <p v-else>Out of Stock</p>
-          <p>Details</p>
-          <ul>
-            <li v-for="detail in details">{{ detail }}</li>
-          </ul>
-          <p>Variants</p>
-          <!-- <ul>
-             need to give each item a unique key 
-            <li v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style=" {backgroundColor: variant.color }">ID: {{ variant.id }} Color: {{ variant.color }}</li>
-          </ul> -->
-
-          <!-- Class and style binding. use camelCase or kebab in quotes: {backgroundColor: variant.color }  or {'background-color': variant.color } -->
-          <!-- <div
-          v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)" class="color-circle" :style=" {backgroundColor: variant.color }">
-        </div> -->
-          
-          <!-- Computed Properties -->
-          <div
-          v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style=" {backgroundColor: variant.color }">
-        </div>
-          <p>Sizes</p>
-          <ul>
-            <li v-for="size of sizes" :key="size">{{ size }}</li>
-          </ul>
-          <!-- Click is the event we are listening for, "cart += 1" is the targeted expression  -->
-          <!-- <button class="button" v-on:click="cart += 1">Add to cart</button> -->
-          <!-- using method for target expression . shorthard for v-on:click is @click -->
-          <!-- Class binding, adds the class disableButton when !inStock . could also use ternary "[!inStock ? disabledButton : '']"-->
-           <button class="button" :disabled="!inStock" :class="{ disabledButton: !inStock }" v-on:click="addToCart">Add to cart</button> 
-           <button class="button" v-on:click="removeFromCart">Remove from cart</button> 
-      </div>
-    </div>
-
+    <!-- props: Getting premiumProp from Main.js passed into premium in the productDisplay.js -->
+    <product-display :premium="premiumProp"></product-display>
   </div>
   <!-- Import App -->
   <script src="./main.js"></script>
 
+  <!-- Import Component -->
+  <script src="./components/productDisplay.js"></script>
+  <script src="./components/productDetails.js"></script>
   <!-- Mount App to div with ID of app-->
   <script>
     const mountedApp = app.mount('#app')
