@@ -63,6 +63,8 @@ app.component('product-display', {
        <button class="button" :disabled="!inStock" :class="{ disabledButton: !inStock }" v-on:click="addToCart">Add to cart</button> 
        <button class="button" v-on:click="removeFromCart">Remove from cart</button> 
   </div>
+  <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+  <review-form @review-submitted="addReview"></review-form>
 </div>
   `
   ,
@@ -83,7 +85,8 @@ app.component('product-display', {
           { id: 2, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0  }
         ],
         sizes: ['Small', "Medium", "Large"],
-        onSale: true
+        onSale: true,
+        reviews: []
       }
     }, 
     methods: {
@@ -107,6 +110,9 @@ app.component('product-display', {
         // set the image to the input mouseover image
         this.selectedVariant = index
         console.log(index)
+      },
+      addReview(inputReview) {
+        this.reviews.push(inputReview)
       }
     },
     computed: {
