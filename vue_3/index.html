@@ -13,7 +13,8 @@
     <div class="nav-bar"></div>
     <div class="cart">Cart {{ cart }} </div>
     <!-- props: Getting premiumProp from Main.js passed into premium in the productDisplay.js -->
-    <product-display :premium="premiumProp"></product-display>
+    <!-- Communicating Events 2.  Add a listener in the index.html called @add-to-cart, then it calls updateCart from main.js. -->
+    <product-display :premium="premiumProp" @add-to-cart="updateCart" @remove-from-cart="removeFromCart"></product-display>
   </div>
   <!-- Import App -->
   <script src="./main.js"></script>

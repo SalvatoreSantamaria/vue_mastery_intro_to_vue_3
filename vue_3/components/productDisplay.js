@@ -83,16 +83,21 @@ app.component('product-display', {
           { id: 2, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0  }
         ],
         sizes: ['Small', "Medium", "Large"],
-        cart: 0,
         onSale: true
       }
     }, 
     methods: {
+      // Communicating Events 1
       addToCart() {
-        this.cart += 1
+        // this.cart += 1 // this.cart is no longer in the productDisplay file, it's now in main.js
+
+        // Emit an event called add to cart. Add a listener in the index.html called @add-to-cart, then it calls updateCart from main.js.
+        // example: @add-to-cart="updateCart"
+        this.$emit('add-to-cart', this.variants[this.selectedVariant].id)  
       }, 
       removeFromCart() {
-        this.cart -= 1
+        //this.cart -= 1
+        this.$emit('remove-from-cart', this.variants[this.selectedVariant].id)
       },
       // updateImage(variantImage) {
       //   // set the image to the input mouseover image
